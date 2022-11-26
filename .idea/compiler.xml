@@ -18,6 +18,21 @@
       <module name="Simple_Tic-Tac-Toe.Topics-Getting_substrings-The_last_of_u.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.Topics-Getting_substrings-Theory.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.Topics-Getting_substrings-Void.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Compression_algorithm.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Convert_a_date.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Determine_the_output.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Determine_the_value.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Determine_the_value__1_.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Double_characters.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Find_the_first_occurrence_of_the_word__the.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Move_the_first_N_characters.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Number_of_occurrences.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Palindrome.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Piece_of_alphabet.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-The_longest_word.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-The_lucky_ticket.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-The_percentage_of_G_and_C_characters.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Processing_strings-Theory.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
