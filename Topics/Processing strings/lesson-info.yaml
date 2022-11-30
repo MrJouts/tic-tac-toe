@@ -14,3 +14,6 @@ content:
 - The percentage of G and C characters
 - Compression algorithm
 - Move the first N characters
+- Cutting out the middle of a string
+- Parse url
+- Generating passwords

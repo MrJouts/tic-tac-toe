@@ -1,10 +1,25 @@
 package tictactoe
 
+import java.lang.Exception
 import kotlin.math.abs
 
 fun main() {
-    val grid = readln()
+    val grid = readln().replace("_", " ")
+    val board = makeBoard(grid)
 
+    showBoard(board)
+
+    var move = ""
+
+    while (!validateMove(move, board)) {
+        move = readln()
+    }
+
+    val (a,b) = move.split(" ").map() { it.toInt()}
+    board[a - 1][b - 1] = 'X'
+    showBoard(board)
+
+    /*
     val winConditions = mutableListOf(
         mutableListOf(0,1,2),
         mutableListOf(3,4,5),
@@ -52,4 +67,45 @@ fun main() {
     ---------
     $output
     """.trimIndent())
+    */
+}
+
+fun makeBoard(grid: String): MutableList<MutableList<Char>> {
+    return mutableListOf(
+        mutableListOf<Char>(grid[0], grid[1], grid[2]),
+        mutableListOf<Char>(grid[3], grid[4], grid[5]),
+        mutableListOf<Char>(grid[6], grid[7], grid[8])
+    )
+}
+
+fun showBoard(board:MutableList<MutableList<Char>>): Unit {
+    println("""
+    ---------
+    | ${board[0][0]} ${board[0][1]} ${board[0][2]} |
+    | ${board[1][0]} ${board[1][1]} ${board[1][2]} |
+    | ${board[2][0]} ${board[2][1]} ${board[2][2]} |
+    ---------
+    """.trimIndent())
+}
+
+fun validateMove(move: String, board: MutableList<MutableList<Char>>): Boolean {
+    var selected = Character.MIN_VALUE
+
+    try {
+        val (a, b) = move.split(" ").map() { it.toInt() }
+        selected = board[a - 1][b - 1]
+
+    } catch (e: NumberFormatException) {
+        println("You should enter numbers!")
+        return false
+    } catch (e: IndexOutOfBoundsException) {
+        println("Coordinates should be from 1 to 3!")
+        return false
+    }
+
+    if(selected != ' ') {
+        println("This cell is occupied! Choose another one!")
+        return false
+    }
+    return true
 }
