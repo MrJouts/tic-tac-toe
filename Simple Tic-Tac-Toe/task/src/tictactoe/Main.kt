@@ -1,73 +1,32 @@
 package tictactoe
 
 import java.lang.Exception
+import javax.swing.DefaultBoundedRangeModel
 import kotlin.math.abs
 
 fun main() {
-    val grid = readln().replace("_", " ")
+    val grid = "         ".replace("_", " ")
     val board = makeBoard(grid)
 
+    var xTurn = true
+
+    var isGameFinishedOrDraw = false
+
     showBoard(board)
 
-    var move = ""
+    while(!isGameFinishedOrDraw) {
+        val move = getMove(board)
 
-    while (!validateMove(move, board)) {
-        move = readln()
+        val (a,b) = move.split(" ").map() { it.toInt()}
+
+        val player = if (xTurn) 'X' else 'O'
+        board[a - 1][b - 1] = player
+        showBoard(board)
+        xTurn = !xTurn
+
+        isGameFinishedOrDraw = checkWin(board)
+
     }
-
-    val (a,b) = move.split(" ").map() { it.toInt()}
-    board[a - 1][b - 1] = 'X'
-    showBoard(board)
-
-    /*
-    val winConditions = mutableListOf(
-        mutableListOf(0,1,2),
-        mutableListOf(3,4,5),
-        mutableListOf(6,7,8),
-        mutableListOf(0,3,6),
-        mutableListOf(1,4,7),
-        mutableListOf(2,5,8),
-        mutableListOf(0,4,8),
-        mutableListOf(2,4,6)
-    )
-
-    var winX = 0
-    var winO = 0
-    var countX = 0
-    var countO = 0
-    var emptyCells = false
-    var output = ""
-
-    for (i in grid) {
-        if (i == '_') emptyCells = true
-        if (i == 'X') countX++
-        if (i == 'O') countO++
-    }
-
-    for(row in winConditions) {
-        val (a, b, c) = row
-        if (grid[a] == 'X' && grid[a] == grid[b] && grid[a] == grid[c]) winX++
-        if (grid[a] == 'O' && grid[a] == grid[b] && grid[a] == grid[c]) winO++
-    }
-
-    if (winX > 0 && winO > 0 || abs(countX - countO) > 1) {
-        output = "Impossible"
-    } else {
-        if (winX == 0 && winO == 0 && emptyCells) output = "Game not finished"
-        if (winX == 0 && winO == 0 && !emptyCells) output = "Draw"
-        if (winX == 1) output = "X wins"
-        if (winO == 1) output = "O wins"
-    }
-
-    println("""
-    ---------
-    | ${grid[0]} ${grid[1]} ${grid[2]} |
-    | ${grid[3]} ${grid[4]} ${grid[5]} |
-    | ${grid[6]} ${grid[7]} ${grid[8]} |
-    ---------
-    $output
-    """.trimIndent())
-    */
 }
 
 fun makeBoard(grid: String): MutableList<MutableList<Char>> {
@@ -88,6 +47,15 @@ fun showBoard(board:MutableList<MutableList<Char>>): Unit {
     """.trimIndent())
 }
 
+fun getMove(board: MutableList<MutableList<Char>>): String {
+    var move = readln()
+
+    while (!validateMove(move, board)) {
+        move = readln()
+    }
+
+    return move
+}
 fun validateMove(move: String, board: MutableList<MutableList<Char>>): Boolean {
     var selected = Character.MIN_VALUE
 
@@ -108,4 +76,60 @@ fun validateMove(move: String, board: MutableList<MutableList<Char>>): Boolean {
         return false
     }
     return true
+}
+
+fun checkWin(board: MutableList<MutableList<Char>>): Boolean {
+    var isFinishedOrDraw = false
+
+    val winConditions = mutableListOf(
+        mutableListOf(0,1,2),
+        mutableListOf(3,4,5),
+        mutableListOf(6,7,8),
+        mutableListOf(0,3,6),
+        mutableListOf(1,4,7),
+        mutableListOf(2,5,8),
+        mutableListOf(0,4,8),
+        mutableListOf(2,4,6)
+    )
+
+    var grid = makeGrid(board)
+
+    var winX = 0
+    var winO = 0
+
+    for(row in winConditions) {
+        val (a, b, c) = row
+        if (grid[a] == 'X' && grid[a] == grid[b] && grid[a] == grid[c]) winX++
+        if (grid[a] == 'O' && grid[a] == grid[b] && grid[a] == grid[c]) winO++
+    }
+
+    var output = ""
+
+    val emptyCells = grid.indexOf(" ") != -1
+    if (winX == 1) {
+        output = "X wins"
+        isFinishedOrDraw = true
+    } else if (winO == 1) {
+        output = "O wins"
+        isFinishedOrDraw = true
+    } else if(!emptyCells) {
+        output = "Draw"
+        isFinishedOrDraw = true
+    }
+
+    if (isFinishedOrDraw) {
+        println(output)
+    }
+
+    return isFinishedOrDraw
+}
+
+fun makeGrid(board: MutableList<MutableList<Char>>): String {
+    var grid = ""
+    for (row in board) {
+        for (cell in row) {
+            grid+= cell
+        }
+    }
+    return grid
 }
